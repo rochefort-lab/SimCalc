@@ -21,9 +21,6 @@ After downloading this repository, use a terminal to navigate into the base fold
 
     pip install -e ./
 
-Should do the trick.
-
-
 Citing SimCalc
 ------------
 
