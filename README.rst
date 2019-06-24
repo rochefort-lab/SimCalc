@@ -4,15 +4,25 @@ SimCalc (Simulated Calcium) simulates calcium imaging data, with the option for 
 
 This code was used for testing our FISSA toolbox, for more information see the FISSA `repository <https://github.com/rochefort-lab/fissa>`__ and `companion paper <https://www.doi.org/10.1038/s41598-018-21640-2>`__.
 
-Currently this code is extremely memory heavy, so on standard laptops it's best not to define too big field-of-views or too long time periods (some type of batching might be necessary). 
+Currently this code can be quite memory heavy, so on standard laptops it's best not to define too big field-of-views or too long time periods.
 
 Usage
 -----
-TODO
+A general tutorial on the use of SimCalc can be found at:
+https://rochefort-lab.github.io/SimCalc/examples/Simulated_data_tutorial.html
+
+The corresponding jupyter notebook can be found in the examples folder of this repository.
 
 Installation
 ------------
-TODO
+After downloading this repository, use a terminal to navigate into the base folder. Then: 
+
+::
+
+    pip install -e ./
+
+Should do the trick.
+
 
 Citing SimCalc
 ------------
