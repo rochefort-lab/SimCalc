@@ -9,7 +9,7 @@ import tifffile
 from scipy.stats import multivariate_normal
 from scipy.stats import norm
 
-def spike_data_poisson(time = 1000., dt=.1, rates=[0.], trials=1):
+def spike_data_poisson(time=1000., dt=.1, rates=[0.], trials=1):
     ''' Generates spiking data (poisson)
 
     (from python course freiburg, slow but functional)
@@ -70,8 +70,8 @@ def calcium_simple(n,taur,taud,dt,A=1,sigma=0.5,l=1000):
     k = np.zeros(l*2)
     t = np.arange(0,l)*dt
     k[l:]=A*(-np.exp(-t/taur)+np.exp(-t/taud))
-    out = np.convolve(k,n,'same')+np.convolve(k, np.random.normal(0,sigma**2,len(n)),'same')
-
+    out = np.convolve(k, n, 'same')
+    out += np.convolve(k, np.random.normal(0, sigma**2, len(n)), 'same')
     return out
 
 def makeDendriteFilter(x0,y0,L,sigma,l,angle0,windiness,bg_noise=0):
