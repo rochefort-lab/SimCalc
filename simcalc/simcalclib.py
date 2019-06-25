@@ -5,7 +5,6 @@ Author: S W Keemink, swkeemink@scimail.eu
 '''
 from __future__ import division
 import numpy as np
-from numpy import exp, sin, cos, exp, pi
 import tifffile
 from scipy.stats import multivariate_normal
 from scipy.stats import norm
@@ -70,7 +69,7 @@ def calcium_simple(n,taur,taud,dt,A=1,sigma=0.5,l=1000):
     out = np.zeros(len(n))
     k = np.zeros(l*2)
     t = np.arange(0,l)*dt
-    k[l:]=A*(-exp(-t/taur)+exp(-t/taud))
+    k[l:]=A*(-np.exp(-t/taur)+np.exp(-t/taud))
     out = np.convolve(k,n,'same')+np.convolve(k, np.random.normal(0,sigma**2,len(n)),'same')
 
     return out
@@ -118,7 +117,7 @@ def makeDendriteFilter(x0,y0,L,sigma,l,angle0,windiness,bg_noise=0):
     angle = angle0
     for j in range(1,L):
         angle += (rand()-0.5)*np.pi*windiness*2
-        path[j,:] = path[j-1,:]+1*[cos(angle),sin(angle)]
+        path[j,:] = path[j-1,:]+1*[np.cos(angle),np.sin(angle)]
 
     # for each pixel, find out how far away from current path you are
     for x in arange(0,l):
