@@ -6,13 +6,6 @@ This code was used for testing our FISSA toolbox, for more information see the F
 
 Currently this code can be quite memory heavy, so on standard laptops it's best not to define too big field-of-views or too long time periods.
 
-Usage
------
-A general tutorial on the use of SimCalc can be found at:
-https://rochefort-lab.github.io/SimCalc/examples/Simulated_data_tutorial.html
-
-The corresponding jupyter notebook can be found in the examples folder of this repository.
-
 Installation
 ------------
 After downloading this repository, use a terminal to navigate into the base folder. Then: 
@@ -20,6 +13,13 @@ After downloading this repository, use a terminal to navigate into the base fold
 ::
 
     pip install -e ./
+
+Usage
+-----
+A general tutorial on the use of SimCalc can be found at:
+https://rochefort-lab.github.io/SimCalc/examples/Simulated_data_tutorial.html
+
+The corresponding jupyter notebook can be found in the examples folder of this repository.
 
 Citing SimCalc
 ------------
