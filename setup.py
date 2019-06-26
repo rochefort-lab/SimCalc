@@ -13,6 +13,9 @@ def read(fname):
 
 install_requires = read('requirements.txt')
 
+extras_require = {}
+# Notebook dependencies for plotting
+extras_require['plotting'] = read('requirements_plotting.txt')
 
 setup(
     name=NAME,
