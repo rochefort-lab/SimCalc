@@ -8,7 +8,7 @@ Currently this code can be quite memory heavy, so on standard laptops it's best 
 
 Installation
 ------------
-After downloading this repository, use a terminal to navigate into the base folder. Then: 
+After downloading this repository, use a terminal to navigate into the base folder. Then:
 
 ::
 
