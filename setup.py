@@ -20,6 +20,7 @@ extras_require['plotting'] = read('requirements_plotting.txt')
 setup(
     name=NAME,
     install_requires = install_requires,
+    extras_require = extras_require,
     version="1.0",
     author="Sander Keemink",
     author_email="swkeemink@scimail.eu",
