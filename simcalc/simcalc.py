@@ -15,7 +15,7 @@ class SimCalc():
     ----------
     stimprop : float
         proportion of cells that are tuned to the stimulus
-    h : inputs
+    h : int
         Height and width of image in pixels
     N : int
         Number of neurons
