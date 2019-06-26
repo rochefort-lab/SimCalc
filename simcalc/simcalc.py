@@ -72,8 +72,8 @@ class SimCalc():
             # get basic variables
             T = self.T
             Cycles = self.StimCycles
-            nFrames = int(T/dt)*2*Cycles
-            times = np.arange(0, T*2*Cycles, dt)
+            nFrames = int(T / dt) * 2 * Cycles
+            times = np.arange(0, T * 2 * Cycles, dt)
 
             # set up firing rates
             if rates is None:
@@ -83,8 +83,8 @@ class SimCalc():
             # Model Poisson firing
             sp = np.zeros((N, nFrames))
             for i in range(N):
-                sp[i, :] = sclib.spike_data_poisson(T, dt, [rates[i],
-                                                 rates[i]*2]*Cycles, trials=1)
+                sp[i, :] = sclib.spike_data_poisson(
+                    T, dt, [rates[i], rates[i] * 2] * Cycles, trials=1)
         else:
             nFrames = sp.shape[1]
 
@@ -95,17 +95,18 @@ class SimCalc():
         c_r = np.zeros(N)  # calcium rise dynamics
         for i, t in enumerate(times):
             # iterate calcium levels
-            c_d += dt*(sp[:, i]/dt - c_d/Tau_d)
-            c_r += dt*(sp[:, i]/dt - c_r/Tau_r)
+            c_d += dt * (sp[:, i] / dt - c_d / Tau_d)
+            c_r += dt * (sp[:, i] / dt - c_r / Tau_r)
             c[:, i] = c_d - c_r
 
         # calculate basic dye levels
         # F = A*c
 
-        maxc = (-2*p[0] - np.sqrt(4*p[0]**2+12*p[1]*(sum(p)-1)))/(6*p[1])
-        maxf = (A*(maxc + p[0]*(maxc**2 - maxc) + p[1]*(maxc**3 - maxc)))
-        F = A*(c + p[0]*(c**2 - c) + p[1]*(c**3 - c))
-        if np.sum(c> maxc)>0:
+        maxc = (-2 * p[0] - np.sqrt(4 * p[0]**2 +
+                                    12 * p[1] * (sum(p) - 1))) / (6 * p[1])
+        maxf = (A * (maxc + p[0] * (maxc**2 - maxc) + p[1] * (maxc**3 - maxc)))
+        F = A * (c + p[0] * (c**2 - c) + p[1] * (c**3 - c))
+        if np.sum(c > maxc) > 0:
             F[c > maxc] = maxf
 
         self.sp = sp
@@ -132,14 +133,14 @@ class SimCalc():
         # get basic variables
         N = self.N
         h = self.h
-        spat_kernels = [0]*N
-        masks = [0]*N
+        spat_kernels = [0] * N
+        masks = [0] * N
 
         # get locations and sizes
         if locs is None:
             locs = np.random.randint(0, h, (N, 2))
         if sizes is None:
-            sizes = np.random.normal(h/2, np.sqrt(h/2), size=N)
+            sizes = np.random.normal(h / 2, np.sqrt(h / 2), size=N)
         if covs is None:
             covs = np.zeros(N)
         if use_rings is None or use_rings:
@@ -149,16 +150,15 @@ class SimCalc():
         for i in range(N):
             cov = np.array([[sizes[i], covs[i]], [covs[i], sizes[i]]])
             # make spatial kernel
-            spat_kernels[i] = sclib.makeGaussianFilter(locs[i, 0],
-                                                    locs[i, 1],
-                                                    cov, h, ring=use_rings[i])
+            spat_kernels[i] = sclib.makeGaussianFilter(
+                locs[i, 0], locs[i, 1], cov, h, ring=use_rings[i])
             spat_kernels[i] /= spat_kernels[i].max()
 
             # make ROI mask
             masks[i] = spat_kernels[i] > 0.5
 
             # add offset to original kernel
-            spat_kernels[i] += masks[i]/5
+            spat_kernels[i] += masks[i] / 5
 
         self.spat_kernels = spat_kernels
         self.masks = masks
@@ -188,12 +188,13 @@ class SimCalc():
         T = self.T
         dt = self.dt
         Cycles = self.StimCycles
-        nFrames = int(T/dt)*2*Cycles
+        nFrames = int(T / dt) * 2 * Cycles
 
         # run brownian motion for temporal component
-        drive = np.concatenate([np.ones(int(T/dt)),
-                                np.ones(int(T/dt))*1.05]*Cycles)*F0
-        Bg = drive + eta*np.cumsum(np.random.normal(size=nFrames))*np.sqrt(dt)
+        drive = np.concatenate([np.ones(int(T / dt)),
+                                np.ones(int(T / dt)) * 1.05] * Cycles) * F0
+        Bg = drive + eta * \
+            np.cumsum(np.random.normal(size=nFrames)) * np.sqrt(dt)
         Bg[Bg < 0] = 0
 
         # start spatial component
@@ -205,8 +206,8 @@ class SimCalc():
                     np.random.randint(0, h, nFilts))
             # loop over locations
             for i in range(len(x)):
-                cov = [[np.random.normal(h*2, np.sqrt(h*2)), 0],
-                       [0, np.random.normal(h*2, np.sqrt(h*2))]]
+                cov = [[np.random.normal(h * 2, np.sqrt(h * 2)), 0],
+                       [0, np.random.normal(h * 2, np.sqrt(h * 2))]]
 
                 mask_temp = sclib.makeGaussianFilter(x[i], y[i], cov, h)
                 Bg_img[0, :, :] += mask_temp
@@ -215,7 +216,7 @@ class SimCalc():
             Bg_img /= Bg_img.mean()
 
         # make video
-        video = np.repeat(Bg_img, nFrames, axis=0)*Bg[:, None, None]
+        video = np.repeat(Bg_img, nFrames, axis=0) * Bg[:, None, None]
 
         self.Bg_trace = Bg
         self.Bg_img = Bg_img[0, :, :]
@@ -240,7 +241,7 @@ class SimCalc():
         T = self.T
         dt = self.dt
         Cycles = self.StimCycles
-        nFrames = int(T/dt)*2*Cycles
+        nFrames = int(T / dt) * 2 * Cycles
         F = self.F
         kernels = self.spat_kernels
 
@@ -250,11 +251,12 @@ class SimCalc():
         for cell in range(N):
             print(cell)
             cell_img = kernels[cell].reshape((1, h, h))
-            data += np.repeat(cell_img, nFrames, axis=0)*F[cell, :, None, None]
+            data += np.repeat(cell_img, nFrames, axis=0) * \
+                F[cell, :, None, None]
             # TODO: speed up above two lines
 
         # add neuropil
-        data += self.npil-1
+        data += self.npil - 1
         # data -= 1
         # data = (self.npil)*(1+data)-1
         # data[data<0]=0
@@ -293,12 +295,13 @@ class SimCalc():
         # make downsampled video
         numFrames = data.shape[0]
         bnds = (0, 0, data.shape[1], data.shape[2])
-        frames = {f: hv.Image(np.mean(data[f:f+downt, :, :], axis=0),
+        frames = {f: hv.Image(np.mean(data[f:f + downt, :, :], axis=0),
                               bounds=bnds) for f in range(0, numFrames, downt)}
         vid = hv.HoloMap(frames, kdims=['frames'])
 
         # make frame indicator
-        vlines = {f: hv.VLine(f+downt/2) for f in range(0, numFrames, downt)}
+        vlines = {f: hv.VLine(f + downt / 2)
+                  for f in range(0, numFrames, downt)}
         frame_indicator = hv.HoloMap(vlines, kdims=['frames'])
 
         return vid, frame_indicator
@@ -318,7 +321,7 @@ class SimCalc():
         """
         # get basic variables
         N = self.N
-        masks = [0]*N
+        masks = [0] * N
 
         # turn cell kernels into masks
         for i in range(N):
