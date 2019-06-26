@@ -14,6 +14,13 @@ After downloading this repository, use a terminal to navigate into the base fold
 
     pip install -e ./
 
+Optionally, it is possible to install with all plotting requirements to run the
+example notebooks yourself:
+
+::
+
+    pip install -e ./['plotting']
+
 Usage
 -----
 A general tutorial on the use of SimCalc can be found at:
