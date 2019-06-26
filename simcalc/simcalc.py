@@ -272,40 +272,6 @@ class SimCalc():
         self.data = data
         self.video = video
 
-    def show_video(self, roi_id, downt):
-        """Showing Holoviews video of data.
-
-        Parameters
-        ----------
-        roi_id : int
-            Which ROI to show
-        downt : int
-            Downsampling in time
-
-        Returns
-        -------
-        HoloMap
-            Video
-        HoloMap
-            Frame indicator to put on top of Curves
-        """
-        # load tiff
-        data = self.video[:, ::-1, :]
-
-        # make downsampled video
-        numFrames = data.shape[0]
-        bnds = (0, 0, data.shape[1], data.shape[2])
-        frames = {f: hv.Image(np.mean(data[f:f + downt, :, :], axis=0),
-                              bounds=bnds) for f in range(0, numFrames, downt)}
-        vid = hv.HoloMap(frames, kdims=['frames'])
-
-        # make frame indicator
-        vlines = {f: hv.VLine(f + downt / 2)
-                  for f in range(0, numFrames, downt)}
-        frame_indicator = hv.HoloMap(vlines, kdims=['frames'])
-
-        return vid, frame_indicator
-
     def gen_masks(self, threshold=0.5):
         """Generate the masks for each ROI.
 
