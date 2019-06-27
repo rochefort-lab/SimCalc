@@ -2,7 +2,7 @@ SimCalc
 =======
 SimCalc (Simulated Calcium) simulates calcium imaging data, with the option for different neural shapes and locations.
 
-This code was used for testing our FISSA toolbox, for more information see the FISSA `repository <https://github.com/rochefort-lab/fissa>`__ and `companion paper <https://www.doi.org/10.1038/s41598-018-21640-2>`__.
+This code was used for testing our FISSA toolbox, for more information see the FISSA `repository <https://github.com/rochefort-lab/fissa>`__ and `companion paper <https://www.doi.org/10.1038/s41598-018-21640-2>`__. For a detailed mathematical description of what SimCalc does see the `FISSA methods <https://www.nature.com/articles/s41598-018-21640-2#Sec8>`__.
 
 Currently this code can be quite memory heavy, so on standard laptops it's best not to define too big field-of-views. For reference, a 100x100 pixel view with 3000 frames would use about 800MB, but this quickly goes up with larger field of views. 
 
