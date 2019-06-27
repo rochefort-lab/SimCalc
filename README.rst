@@ -4,7 +4,7 @@ SimCalc (Simulated Calcium) simulates calcium imaging data, with the option for 
 
 This code was used for testing our FISSA toolbox, for more information see the FISSA `repository <https://github.com/rochefort-lab/fissa>`__ and `companion paper <https://www.doi.org/10.1038/s41598-018-21640-2>`__.
 
-Currently this code can be quite memory heavy, so on standard laptops it's best not to define too big field-of-views or too long time periods.
+Currently this code can be quite memory heavy, so on standard laptops it's best not to define too big field-of-views. For reference, a 100x100 pixel view with 3000 frames would use about 800MB, but this quickly goes up with larger field of views. 
 
 Installation
 ------------
